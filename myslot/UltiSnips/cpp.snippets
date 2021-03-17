@@ -1,0 +1,34 @@
+global !p
+from snippet_tools.cpp import expand_by_postfix_template
+from snippet_tools.common import expand_anon
+endglobal
+
+post_jump "expand_anon(snip)"
+snippet "([\w][\d\w.\->]*?).for" "Postfix for-loop" r
+`!p snip.rv = expand_by_postfix_template('for-loop', snip, match.group(1))`
+endsnippet
+
+post_jump "expand_anon(snip)"
+snippet "([\w][\d\w.\->]*?).fori" "Postfix for-i-loop" r
+`!p snip.rv = expand_by_postfix_template('for-i-loop', snip, match.group(1))`
+endsnippet
+
+post_jump "expand_anon(snip)"
+snippet "([\w][\d\w.\->]*?).if" "Postfix if-expr" r
+`!p snip.rv = expand_by_postfix_template('if', snip, match.group(1))`
+endsnippet
+
+post_jump "expand_anon(snip)"
+snippet "([\w][\d\w.\->]*?).be" "Postfix begin-end" r
+`!p snip.rv = expand_by_postfix_template('begin-end', snip, match.group(1))`
+endsnippet
+
+post_jump "expand_anon(snip)"
+snippet "([\w][\d\w.\->]*?).mv" "Postfix std::move" r
+`!p snip.rv = expand_by_postfix_template('std::move', snip, match.group(1))`
+endsnippet
+
+post_jump "expand_anon(snip)"
+snippet "([\w][\d\w.\->]*?).rt" "Postfix return" r
+`!p snip.rv = expand_by_postfix_template('return', snip, match.group(1))`
+endsnippet

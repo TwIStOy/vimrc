@@ -23,6 +23,9 @@ endif
 # Disable shallow cloning, full copy of these repos.
 g:plug_shallow = 0
 
+# Prefer python3
+set pyxversion=3
+
 # Install Plugins
 #
 # Plugins declared after this line will be downloaded inside '~/.vim/plugged'
