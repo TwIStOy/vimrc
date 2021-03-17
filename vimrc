@@ -45,7 +45,7 @@ Plug 'itchyny/lightline.vim'
 # Theme
 Plug 'bluz71/vim-nightfly-guicolors'
 
-Plug 'SirVer/ultisnips'
+Plug 'TwIStOy/ultisnips'
 
 Plug 'ntpeters/vim-better-whitespace'
 

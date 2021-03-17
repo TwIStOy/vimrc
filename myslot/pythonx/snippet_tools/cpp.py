@@ -1,32 +1,43 @@
 #####################
 #  Postfix Section  #
 #####################
+from UltiSnips import UltiSnips_Manager
 
-_POSTFIX_TEMPLATES = {
-    'for-loop': ['for (auto&& item : {0}) {{',
-                 '  ${{0:/* body */}}',
-                 '}}'],
-    'for-i-loop': ['for (auto i = 0u; i < {0}; ++i) {{',
-                   '  ${{0:/* body */}}',
-                   '}}'],
-    'if': ['if ({0}) {{',
-          '  ${{0:/* body */}}',
-          '}}'],
-    'begin-end': ['std::begin({0}), std::end({0})'],
-    'std::move': ['std::move({0})'],
-    'return': ['return {0};'],
-}
+EXPR_REGEX = r'(?P<expr>(?P<id_expr>(?P<id>[*]?[\w_][\d\w_]*)(?P<tpl>\<((?P<id_num>(?P<num>(0x)?[1-9]\d*)|(?P&id))(,\s*(?P&id_num))*)?\>)?(?P<init>{(?P<arg_list>(?P&expr)(,\s(?P&expr))*)?})?(?P<args>\((?P&arg_list)?\))?((->|\.)(?P&id_expr))?)|(?P&num))'
+
+_POSTFIX_FOR_LOOP_VALUE = """for (auto&& item : `!p snip.rv = match.group(1)`) {
+  ${0:/* body */}
+}"""
+
+_POSTFIX_FOR_I_LOOP_VALUE = """for (auto i = 0u; i < `!p snip.rv = match.group(1)`; ++i) {
+  ${0:/* body */}
+}"""
+
+_POSTFIX_IF_VALUE = """if (`!p snip.rv = match.group(1)`) {
+  ${0:/* body */}
+}"""
+
+_POSTFIX_BEGIN_END_VALUE = 'std::begin(`!p snip.rv = match.group(1)`), std::end(`!p snip.rv = match.group(1)`)${0}'
+
+_POSTFIX_STD_MOVE_VALUE = 'std::move(`!p snip.rv = match.group(1)`)${0}'
+
+_POSTFIX_RETURN_VALUE = 'return `!p snip.rv = match.group(1)`;${0}'
 
 
-def expand_by_postfix_template(key, snip, *args):
-  tpl = _POSTFIX_TEMPLATES[key]
-  first_line = True
-  for line in tpl:
-    if first_line:
-      snip.rv = line.format(*args)
-      first_line = False
-    else:
-      snip += line.format(*args)
-  return snip.rv
+
+def register_postfix_snippets():
+  UltiSnips_Manager.add_snippet(EXPR_REGEX + r'\.for', _POSTFIX_FOR_LOOP_VALUE,
+                                "Postfix for-loop", 'r', 'cpp', -50)
+  UltiSnips_Manager.add_snippet(EXPR_REGEX + r'\.fori', _POSTFIX_FOR_I_LOOP_VALUE,
+                                "Postfix for-i-loop", 'r', 'cpp', -50)
+  UltiSnips_Manager.add_snippet(EXPR_REGEX + r'\.if', _POSTFIX_IF_VALUE,
+                                "Postfix if-expr", 'r', 'cpp', -50)
+  UltiSnips_Manager.add_snippet(EXPR_REGEX + r'\.be', _POSTFIX_BEGIN_END_VALUE,
+                                "Postfix begin-end", 'r', 'cpp', -50)
+  UltiSnips_Manager.add_snippet(EXPR_REGEX + r'\.mv', _POSTFIX_STD_MOVE_VALUE,
+                                "Postfix std::move", 'r', 'cpp', -50)
+  UltiSnips_Manager.add_snippet(EXPR_REGEX + r'\.rt', _POSTFIX_RETURN_VALUE,
+                                "Postfix return", 'r', 'cpp', -50)
+
 
 # vim: et sw=2 ts=2

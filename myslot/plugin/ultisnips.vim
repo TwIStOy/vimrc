@@ -1,10 +1,12 @@
-vim9script noclear
+let g:UltiSnipsExpandTrigger = '<c-e>'
+let g:UltiSnipsJumpForwardTrigger = '<c-f>'
+let g:UltiSnipsJumpBackwardTrigger = '<c-b>'
 
-g:UltiSnipsExpandTrigger = '<c-f>'
-g:UltiSnipsJumpForwardTrigger = '<c-f>'
-g:UltiSnipsJumpBackwardTrigger = '<c-b>'
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit = 'vertical'
 
-# If you want :UltiSnipsEdit to split your window.
-g:UltiSnipsEditSplit = 'vertical'
+" Register postfix snippets
+py3 from snippet_tools.cpp import register_postfix_snippets
+py3 register_postfix_snippets()
 
-# vim: et ts=2 sw=2
+" vim: et ts=2 sw=2
