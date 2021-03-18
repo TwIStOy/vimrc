@@ -26,6 +26,8 @@ g:plug_shallow = 0
 # Prefer python3
 set pyxversion=3
 
+source $HOME/project/vimrc/init-settings.vim
+
 # Install Plugins
 #
 # Plugins declared after this line will be downloaded inside '~/.vim/plugged'
@@ -33,24 +35,24 @@ set pyxversion=3
 plug#begin('~/.vim/plugged')
 
 Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
-
 Plug 'skywind3000/asyncrun.vim'
-
-Plug 'tenfyzhong/axring.vim'
-
 Plug 'Yggdroot/indentLine'
-
 Plug 'itchyny/lightline.vim'
+Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
+Plug 'jszakmeister/vim-togglecursor'
 
 # Theme
 Plug 'bluz71/vim-nightfly-guicolors'
 
+# Editing
 Plug 'TwIStOy/ultisnips'
-
 Plug 'ntpeters/vim-better-whitespace'
-
+Plug 'tenfyzhong/axring.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
+
+# Auto Complete
+Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
 
 plug#end()
 
